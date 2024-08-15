@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        #mainbox{
+            width: 100%;
+            height: 100%;
+            position: relative;
+            display: flex;
+            flex-direction: row;
+            align-items: space-between;
+            padding-right:0;
+            margin-top: 2%;
+
+            
+        }
+        #msgbox {
+            border: 1px solid #0000002f;
+            height: 550px;
+            width: 100px;
+            float: left;
+            padding: 20px;
+            margin-left: 20px;
+            border-top-left-radius: 1rem;
+            border-bottom-left-radius: 1rem;
+            overflow: hidden;
+            overflow-y: scroll;
+        }
+        .msglist{
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        #msginterface {
+            border: 1px solid #0000002f;
+            position: relative;
+            /* height: 100%; */
+            width: 800px;
+            float: left;
+            border-bottom-right-radius: 1rem;
+            border-top-right-radius: 1rem;
+            overflow: hidden;
+        }
+        .msg-text-sender{
+            background: rgba(128, 128, 128, 0.205);
+            padding: 10px 20px;
+            border-radius: 8px;
+            display: flex;
+            text-align: left;
+            flex-direction: column;
+            max-width: 300px;
+            font-size: smaller;
+        }
+        .msg-text-sender-time{
+            color: #80808080;
+            font-size: small;
+            margin-top: 10px;
+        }
+        .msg-text-receiver-time{
+            display: flex;
+            text-align: center;
+            justify-content: end; 
+            color:#80808080 ;
+            font-size: small;
+            margin-top: 20px;
+        }
+        .msg-text-receiver{
+            padding: 10px 20px;
+            padding-bottom: 0;
+            border-radius: 8px;
+            height: 2%;
+            display: flex;
+            text-align: left;
+            justify-content: end;
+            background: rgba(4, 233, 4, 0.205);
+            max-width: 300px;
+            font-size: smaller;
+        }
+        .msgsearch{
+            height: 30px;
+            border-color: #0000002f;
+            border-radius: 8%;
+            background: url(src.png) ;
+            background-size: 7%;
+            background-repeat: no-repeat;
+            padding-left: 30px;
+            background-position: 5px;
+            margin-bottom: 8px;
+
+        }
+
+        .image {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+            margin-right: 12px;
+            padding: 10px;
+        }
+        .sender-image{
+                height: 30px;
+        }
+
+        .personinfo {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #0000002f;
+            height: 50px;
+        }
+
+        .adds {
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #0000002f;
+            height: 67px;
+        }
+        .adds-bottom-line{
+            display: inline-flex;
+            height: 20px;
+            height: 20px;
+            margin-left:10px;
+            padding-right: 6px;
+        }
+
+        .msg {
+            height: calc(100% - 170px);
+        }
+        .msg-container{
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+        .msg-container-send{
+            display: flex;
+            align-items: end;
+            margin-top: 40px;
+            justify-content: end;
+        }
+
+        .chatbox {
+            border-top: 1px solid #0000002f;
+            height: 36px;
+            display: flex;
+        }
+
+        .text {
+            width: 75%;
+            padding-left: 8px;
+            border: none;
+            border-right: 1px solid #0000002f;
+        }
+
+        .atch {
+            width: 50%;
+            border: none;
+        }
+
+        .send {
+            width: 50%;
+            border: none;
+            border-left: 1px solid #0000002f;
+
+        }
+        .icon {
+            background-color: unset;
+            cursor: pointer;
+            padding: 0;
+        }
+        .emote{
+            background-color: unset;
+            cursor: pointer;
+            padding: 0;
+            border: none;
+            padding-left: 10px;
+        }
+
+        .butoncontainer {
+            width: 25%;
+            height: 100%;
+            display: flex;
+
+        }
+        .personlist{
+            display: flex;
+            flex-direction: column;
+        }
+        .person{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+         .person:hover{
+            background: #a3a2a213;
+            border-left: 2px orange solid;
+            display: flex;
+            overflow: hidden;
+
+        }
+        .person:focus-within{
+            background: #a3a2a213;
+            border-left: 2px orangered solid;
+            display: flex;
+            overflow: hidden;
+        }
+        .focusbtn{
+            opacity: 0;
+            position: absolute;
+            height: 100%;
+            width: 100%;
+        }
+        .adds{
+            display: flex;
+            flex-direction: row;
+            align-items:center;
+            padding: 10px;
+
+
+
+        }
+        .link:link{
+            color: orange;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .link:visited{
+            color: orange;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .faded{
+            color: #80808080;
+            font-size: small;
+        }
+        .title{
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-block: 10px;
+            font-size: 1rem;
+            margin-bottom: 0;
+        }
+        .marginfix{
+            margin:0;
+        }
+        .push{
+            margin-right:9px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="mainbox"class="container">
+        <div id="msgbox" class="col-4 col-lg-4">
+            <div>
+                <div class="msglist">
+                    <input class="msgsearch" placeholder="Mesaj Ara">
+                    <div class="personlist">
+                        <div class="person">
+                            <img class="image" src="1mage.webp">
+                            <div>
+                                <input class="focusbtn">
+                                <div>
+                                    <span>Xian Zhou</span>
+                                    <span class="faded">3 days</span>
+                                </div>
+                                <span class="faded">You:How To Boost....</span>
+                            </div>
+                        </div>
+                        <div class="person">
+                            <img class="image" src="1mage.webp">
+                            <div>
+                                <input class="focusbtn">
+                                <div>
+                                    <span>Valdemar Forstberg</span>
+                                    <span class="faded">1 hours</span>
+                                </div>
+                                <span class="faded">How to Boost Traffic....</span>
+                            </div>
+                        </div>
+                        <div class="person">
+                            <img class="image" src="1mage.webp">
+                            <div>
+                                <input class="focusbtn">
+                                <div>
+                                    <span>Lewis Simmons</span>
+                                    <span class="faded">10 hours</span>
+                                </div>
+                                <span class="faded">Internet Banner...</span>
+                            </div>
+                        </div>
+                        <div class="person">
+                            <img class="image" src="1mage.webp">
+                            <div>
+                                <input class="focusbtn">
+                                <div>
+                                    <span>Mo Chun</span>
+                                    <span class="faded">2 days</span>
+                                </div>
+                                <span class="faded">Free Real Estate...</span>
+                            </div>
+                        </div>
+                        <div class="person">
+                            <img class="image" src="1mage.webp">
+                            <div>
+                                <input class="focusbtn">
+                                <div>
+                                    <span>Mgbankwo Orjee</span>
+                                    <span class="faded">10 hours</span>
+                                </div>
+                                <span class="faded">6 Powerful Tips To...</span>
+                            </div>
+                        </div>
+                        <div class="person">
+                            <img class="image" src="1mage.webp">
+                            <div>
+                                <input class="focusbtn">
+                                <div>
+                                    <span>Ham Chuwon</span>
+                                    <span class="faded">10 hours</span>
+                                </div>
+                                <span class="faded">Advertisers Embrace...</span>
+                            </div>
+                        </div>
+                        <div class="person">
+                            <img class="image" src="1mage.webp">
+                            <div>
+                                <input class="focusbtn">
+                                <div>
+                                    <span>Fariba Mirzaii</span>
+                                    <span class="faded">10 hours</span>
+                                </div>
+                                <span class="faded">Nine Features Of An...</span>
+                            </div>
+                        </div>
+                        <div class="person">
+                            <img class="image" src="1mage.webp">
+                            <div>
+                                <input class="focusbtn">
+                                <div>
+                                    <span>Amelia Edwards</span>
+                                    <span class="faded">10 hours</span>
+                                </div>
+                                <span class="faded">7 Ways To Advertise....</span>
+                            </div>
+                        </div>
+                        <div class="person">
+                            <img class="image" src="1mage.webp">
+                            <div>
+                                <input class="focusbtn">
+                                <div>
+                                    <span>Adhraaa Al Azimi</span>
+                                    <span class="faded">10 hours</span>
+                                </div>
+                                <span class="faded">Influencing The...</span>
+                            </div>
+                        </div>
+                        <div class="person">
+                            <img class="image" src="1mage.webp">
+                            <div>
+                                <input class="focusbtn">
+                                <div>
+                                    <span>Adhraaa Al Azimi</span>
+                                    <span class="faded">10 hours</span>
+                                </div>
+                                <span class="faded">Influencing The...</span>
+                            </div>
+                        </div>
+                        <div class="person">
+                            <img class="image" src="1mage.webp">
+                            <div>
+                                <input class="focusbtn">
+                                <div>
+                                    <span>Adhraaa Al Azimi</span>
+                                    <span class="faded">10 hours</span>
+                                </div>
+                                <span class="faded">Influencing The...</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="msginterface" class="col-7 col-lg-7">
+            <div class="personinfo">
+                <img class="image" src="1mage.webp">
+                <span>Fariba Mirzaii</span>
+            </div>
+            <div class="adds">
+                <img src="download.jpg" height="70%" width="7%">
+                <div class="push">
+                    <h5 class="title">Çarşambaya Kadar Acil• Kazasız Tramersiz BMW 3.20 i M Sport</h5>
+                    <div class="adds-bottom-line">
+                    <p class="faded">118i • First Edition Sport Line • Üsküdar/Burhaniye Mahallesi</p>
+                        </ul>
+                    </div>
+                </div>
+                <a class="link" href="https://freetrial.finalfantasyxiv.com/na/download">İlana Git  ></a>
+            </div>
+            <div class="msg">
+               <div class="msg-container">
+                <img class="image" src="1mage.webp">
+                <div class="sender-image">
+                    <div>
+                        <span class="msg-text-sender-time">4.02 PM</span>
+                        <div class="msg-text-sender">
+                            <p class="marginfix">Lorem ipsum dolar sit amet,consectetur adipiscing elit.</p>
+                        </div>
+                    </div>
+                </div>
+               </div>
+               <div class="msg-container-send">
+                    <div>
+                        <span class="msg-text-receiver-time">4.02 PM</span>
+                        <div class="msg-text-receiver">
+                            <p>Lorem ipsum dolar sit amet,consectetur adipiscing elit.</p>
+                        </div>
+                    </div>
+               </div>
+               <div class="msg-container">
+                <img class="image" src="1mage.webp">
+                <div class="sender-image">
+                    <div>
+                        <span class="msg-text-sender-time">4.02 PM</span>
+                        <div class="msg-text-sender">
+                            <p class="marginfix">Lorem ipsum dolar sit amet,consectetur adipiscing elit.</p>
+                        </div>
+                    </div>
+                </div>
+               </div>
+               </div>
+            <div class="chatbox">
+                <button class="emote"><img src="emt.png" width="20px" height="20px"></button>
+                <input class="text" type="text" placeholder="mesaj">
+                <div class="butoncontainer">
+                    <button class="icon atch"><i class="fas fa-image"></i></button>
+                    <button class="icon send"><i class="fas fa-paper-plane"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
